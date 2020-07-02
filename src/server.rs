@@ -52,7 +52,7 @@ fn handle_stream(mut stream: TcpStream) {
 fn handle_decrypted_stream(mut stream: TcpStream, key: Vec<u8>) {
     let buffer = &mut [0; 2076];
     let mut stdout = io::stdout();
-    let aead = Aes256Gcm::new(*GenericArray::from_slice(key.as_slice()));
+    let aead = Aes256Gcm::new(&GenericArray::from_slice(key.as_slice()));
     loop {
         match stream.read(&mut buffer[..]) {
             Ok(size) => {
